@@ -2,14 +2,11 @@ package org.mashup.takoyaki.di.activity
 
 
 import android.support.v4.app.FragmentManager
-import android.support.v7.widget.LinearLayoutManager
-
-import org.mashup.takoyaki.di.fragment.FragmentScoped
 import org.mashup.takoyaki.ui.activity.MainActivity
-
 import dagger.Module
 import dagger.Provides
-import dagger.android.ContributesAndroidInjector
+import org.mashup.takoyaki.R
+
 
 @Module
 class MainActivityModule {
@@ -18,5 +15,12 @@ class MainActivityModule {
     @ActivityScoped
     internal fun provideFragmentManager(activity: MainActivity): FragmentManager {
         return activity.supportFragmentManager
+    }
+
+    @Provides
+    @ActivityScoped
+    internal fun provideTabTitles(activity: MainActivity): Array<String> {
+        return arrayOf(activity.getString(R.string.food_truck_open),
+                activity.getString(R.string.food_truck_close))
     }
 }

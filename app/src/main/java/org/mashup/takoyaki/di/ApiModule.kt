@@ -41,10 +41,10 @@ class ApiModule {
 
     @Provides
     @Singleton
-    internal fun provideRetrofit(baseUrl: String, client: OkHttpClient): Retrofit {
+    internal fun provideRetrofit(client: OkHttpClient): Retrofit {
         val builder = Retrofit.Builder()
         builder.client(client)
-        builder.baseUrl(baseUrl)
+        builder.baseUrl(BuildConfig.BASE_URL)
         builder.addConverterFactory(
                 GsonConverterFactory.create(GsonBuilder().setPrettyPrinting()
                         .create()))
@@ -59,10 +59,5 @@ class ApiModule {
     @Singleton
     internal fun provideApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
-    }
-
-    @Provides
-    internal fun provideBaseUrl(): String {
-        return "https://openapi.naver.com/v1/search/"
     }
 }
