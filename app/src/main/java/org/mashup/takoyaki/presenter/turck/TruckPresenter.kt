@@ -1,6 +1,6 @@
-package org.mashup.takoyaki.presenter.map
+package org.mashup.takoyaki.presenter.turck
 
-import org.mashup.takoyaki.data.repository.MapRepository
+import org.mashup.takoyaki.data.repository.FoodTruckRepository
 import org.mashup.takoyaki.presenter.Presenter
 import javax.inject.Inject
 
@@ -8,8 +8,8 @@ import javax.inject.Inject
 /**
  * Created by jonghunlee on 2018-07-01.
  */
-class MapPresenter @Inject
-constructor(private val repository: MapRepository) : Presenter<MapView>() {
+class TruckPresenter @Inject
+constructor(private val repository: FoodTruckRepository) : Presenter<TruckView>() {
 
     fun getFoodTrucks() {
         view?.showProgress()

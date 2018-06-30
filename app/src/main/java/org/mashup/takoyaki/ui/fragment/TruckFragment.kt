@@ -1,6 +1,5 @@
 package org.mashup.takoyaki.ui.fragment
 
-import android.icu.lang.UCharacter.GraphemeClusterBreak.L
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -12,23 +11,31 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import kotlinx.android.synthetic.main.fragment_map.*
+import com.google.android.gms.maps.model.Marker
 import org.mashup.takoyaki.R
 import javax.inject.Inject
 import com.google.android.gms.maps.model.MarkerOptions
+import org.mashup.takoyaki.data.remote.model.FoodTruck
 import org.mashup.takoyaki.data.remote.model.FoodTrucks
-import org.mashup.takoyaki.presenter.map.MapPresenter
-import org.mashup.takoyaki.presenter.map.MapView
+import org.mashup.takoyaki.presenter.turck.TruckPresenter
+import org.mashup.takoyaki.presenter.turck.TruckView
+import org.mashup.takoyaki.ui.activity.TruckDetailActivity
 
 /**
  * Created by jonghunlee on 2018-06-30.
  */
-class MapFragment @Inject constructor() : Fragment(), OnMapReadyCallback, MapView {
+class TruckFragment @Inject constructor() : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, TruckView {
+
+    companion object {
+        private val TAG = TruckFragment::class.java.simpleName
+    }
 
     @Inject
-    lateinit var presenter: MapPresenter
+    lateinit var presenter: TruckPresenter
 
     private lateinit var googleMap: GoogleMap
+
+    private val foodTrucks = mutableListOf<FoodTruck>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_map, container, false)
@@ -50,14 +57,31 @@ class MapFragment @Inject constructor() : Fragment(), OnMapReadyCallback, MapVie
 
         // 서울시청
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(37.566692, 126.978416), 7f))
-
+        googleMap.setOnMarkerClickListener(this)
         presenter.getFoodTrucks()
     }
 
     override fun resultFoodTrucks(foodTrucks: FoodTrucks) {
+        this.foodTrucks.clear()
+        this.foodTrucks.addAll(foodTrucks.data)
+
         foodTrucks.data.forEach {
-            googleMap.addMarker(MarkerOptions().position(LatLng(it.latitude, it.longitude)))
+            val marker = googleMap.addMarker(MarkerOptions()
+                    .position(LatLng(it.latitude, it.longitude)))
+            marker.tag = it.truckName
         }
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        Log.d(TAG, "market tag : ${marker.tag as String}")
+        foodTrucks.forEach {
+            if (it.truckName == marker.tag as String) {
+                TruckDetailActivity.start(activity!!, it.truckName)
+                return true
+            }
+        }
+
+        return true
     }
 
     override fun showErrorMessage(throwable: Throwable) {

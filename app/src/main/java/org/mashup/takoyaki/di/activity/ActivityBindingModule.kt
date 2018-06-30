@@ -5,8 +5,9 @@ import org.mashup.takoyaki.ui.activity.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import org.mashup.takoyaki.di.fragment.FragmentScoped
-import org.mashup.takoyaki.ui.fragment.CloseFoodTruckFragment
-import org.mashup.takoyaki.ui.fragment.MapFragment
+import org.mashup.takoyaki.ui.activity.TruckDetailActivity
+import org.mashup.takoyaki.ui.fragment.CloseTruckFragment
+import org.mashup.takoyaki.ui.fragment.TruckFragment
 
 @Module
 abstract class ActivityBindingModule {
@@ -15,12 +16,15 @@ abstract class ActivityBindingModule {
     @ContributesAndroidInjector(modules = [MainActivityModule::class])
     internal abstract fun mainActivity(): MainActivity
 
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = [TruckDetailModule::class])
+    internal abstract fun truckDetailActivity(): TruckDetailActivity
 
     @FragmentScoped
     @ContributesAndroidInjector
-    internal abstract fun mapFragment(): MapFragment
+    internal abstract fun mapFragment(): TruckFragment
 
     @FragmentScoped
     @ContributesAndroidInjector
-    internal abstract fun closeFoodTruckFragment(): CloseFoodTruckFragment
+    internal abstract fun closeFoodTruckFragment(): CloseTruckFragment
 }

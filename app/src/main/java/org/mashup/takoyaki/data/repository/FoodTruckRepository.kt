@@ -10,7 +10,7 @@ import javax.inject.Inject
 /**
  * Created by jonghunlee on 2018-07-01.
  */
-class MapRepository @Inject constructor(apiService: ApiService) : BaseRepository(apiService) {
+class FoodTruckRepository @Inject constructor(apiService: ApiService) : BaseRepository(apiService) {
 
     fun getFoodTrucks(): Single<FoodTrucks> {
         return apiService.getFoodTrucks()

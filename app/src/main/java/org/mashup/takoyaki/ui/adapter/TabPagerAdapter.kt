@@ -23,8 +23,8 @@ constructor(fm: FragmentManager,
 
     override fun getItem(position: Int): Fragment? {
         when (position) {
-            FRAGMENT_MAP -> return fragmentHolder.mapFragment
-            FRAGMENT_CLOSE -> return fragmentHolder.closeFoodTruckFragment
+            FRAGMENT_MAP -> return fragmentHolder.truckFragment
+            FRAGMENT_CLOSE -> return fragmentHolder.closeTruckFragment
         }
 
         return null

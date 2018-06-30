@@ -7,4 +7,6 @@
     <string name="search">검색</string>
     <string name="food_truck_close">지금없어요</string>
     <string name="map_fragment">mapFragment</string>
+    <string name="truck_name">트럭 이름</string>
+    <string name="truck_description">트럭 설명</string>
 </resources>

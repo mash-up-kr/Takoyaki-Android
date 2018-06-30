@@ -8,5 +8,5 @@ import javax.inject.Inject
  */
 
 class FragmentHolder @Inject
-constructor(val mapFragment: MapFragment,
-            val closeFoodTruckFragment: CloseFoodTruckFragment)
+constructor(val truckFragment: TruckFragment,
+            val closeTruckFragment: CloseTruckFragment)

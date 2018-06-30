@@ -8,7 +8,8 @@ package org.mashup.takoyaki.data.remote.model
 
 data class FoodTrucks(val data: List<FoodTruck>)
 
-data class FoodTruck(val truckName: String,
+data class FoodTruck(val id: Int,
+                     val truckName: String,
                      val latitude: Double,
                      val longitude: Double,
                      val region: String)
