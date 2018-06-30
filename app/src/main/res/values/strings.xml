@@ -6,4 +6,5 @@
     <string name="food_truck_open">지금있어요</string>
     <string name="search">검색</string>
     <string name="food_truck_close">지금없어요</string>
+    <string name="map_fragment">mapFragment</string>
 </resources>

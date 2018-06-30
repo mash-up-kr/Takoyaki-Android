@@ -6,9 +6,13 @@ import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.mashup.takoyaki.R
 import org.mashup.takoyaki.ui.adapter.TabPagerAdapter
+import org.mashup.takoyaki.ui.fragment.FragmentHolder
 import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity() {
+
+    @Inject
+    lateinit var fragmentHolder: FragmentHolder
 
     @Inject
     lateinit var tabPagerAdapter: TabPagerAdapter

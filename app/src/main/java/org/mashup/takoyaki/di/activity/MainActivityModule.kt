@@ -20,7 +20,6 @@ class MainActivityModule {
     @Provides
     @ActivityScoped
     internal fun provideTabTitles(activity: MainActivity): Array<String> {
-        return arrayOf(activity.getString(R.string.food_truck_open),
-                activity.getString(R.string.food_truck_close))
+        return arrayOf(activity.getString(R.string.food_truck_open), activity.getString(R.string.food_truck_close))
     }
 }
