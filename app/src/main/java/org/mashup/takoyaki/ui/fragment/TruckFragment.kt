@@ -79,15 +79,15 @@ class TruckFragment @Inject constructor() : BaseFragment(), OnMapReadyCallback, 
 
     override fun onMarkerClick(marker: Marker): Boolean {
         Log.d(TAG, "market tag : ${marker.tag as String}")
-        foodTrucks.forEach {
-            if (it.truckName == marker.tag as String) {
-                fragmentManager?.beginTransaction()
-                        ?.setCustomAnimations(R.anim.slide_up, R.anim.slide_down)
-                        ?.add(R.id.flContents, TruckDetailFragment.newInstance(it.truckName))
-                        ?.addToBackStack(TruckDetailFragment.TAG)?.commit()
-                return true
-            }
-        }
+//        foodTrucks.forEach {
+//            if (it.truckName == marker.tag as String) {
+//                fragmentManager?.beginTransaction()
+//                        ?.setCustomAnimations(R.anim.slide_up, R.anim.slide_down)
+//                        ?.add(R.id.flContents, TruckDetailFragment.newInstance(it.truckName))
+//                        ?.addToBackStack(TruckDetailFragment.TAG)?.commit()
+//                return true
+//            }
+//        }
 
         return true
     }
