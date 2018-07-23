@@ -15,5 +15,9 @@
     <string name="truck_description">트럭 설명</string>
 
     <string name="search_this_location">이 지역 검색하기</string>
-    
+    <string name="write_review">리뷰쓰기</string>
+    <string name="report_truck">제보하기</string>
+    <string name="search_truck">검색하기</string>
+    <string name="my_page">마이 페이지</string>
+
 </resources>
