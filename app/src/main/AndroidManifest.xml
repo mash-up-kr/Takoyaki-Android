@@ -4,6 +4,8 @@
     package="org.mashup.takoyaki">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".App"
@@ -26,7 +28,18 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".ui.activity.ReportActivity"></activity>
+        <activity android:name=".ui.activity.ReportActivity" />
+        <activity android:name=".ui.activity.SelectPositionActivity" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="org.mashup.takoyaki.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>
