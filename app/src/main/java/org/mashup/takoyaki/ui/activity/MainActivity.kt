@@ -27,6 +27,8 @@ class MainActivity : DaggerAppCompatActivity() {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.mainContent, fragmentHolder.getFragment(FragmentType.MAIN))
                 .commit()
+
+        btReport.setOnClickListener { ReportActivity.start(this) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -62,7 +62,7 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
 
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.13'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.16'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
 
     implementation "com.google.dagger:dagger:$daggerVersion"
@@ -75,6 +75,11 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
 
     implementation 'com.google.android.gms:play-services-maps:15.0.1'
+
+    implementation 'com.zhihu.android:matisse:0.5.1-beta1'
+    implementation('com.github.tbruyelle:rxpermissions:0.10.2') {
+        exclude group: 'io.reactivex.rxjava2'
+    }
 
     testImplementation 'junit:junit:4.12'
 
