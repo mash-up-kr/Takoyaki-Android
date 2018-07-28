@@ -1,4 +1,3 @@
 # Takoyaki-Android
 
-
-안녕하세요
+타코야키 팀 Android Project
