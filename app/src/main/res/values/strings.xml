@@ -19,5 +19,16 @@
     <string name="report_truck">제보하기</string>
     <string name="search_truck">검색하기</string>
     <string name="my_page">마이 페이지</string>
+    <string name="input_truck_name">상호명을 입력하세요</string>
+    <string name="permission_request_denied">사진을 등록하기 위해서 권한 동의가 필요합니다</string>
+    <string name="menu">메뉴</string>
+    <string name="price">가격</string>
+
+    <!--spinnerExpireTime-->
+    <string-array name="report_expire_times">
+        <item>1일</item>
+        <item>1주</item>
+        <item>1달</item>
+    </string-array>
 
 </resources>
