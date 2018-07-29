@@ -43,7 +43,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".ui.activity.MyPageActivity"></activity>
+        <activity android:name=".ui.activity.MyPageActivity" />
+        <activity android:name=".ui.activity.BookmarkActivity"></activity>
     </application>
 
 </manifest>

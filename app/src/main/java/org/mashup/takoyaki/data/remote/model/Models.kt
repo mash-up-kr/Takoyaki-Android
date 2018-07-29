@@ -17,3 +17,7 @@ data class FoodTruck(val id: Int,
 data class FoodTruckDetail(val truckName: String,
                            val description: String,
                            val type: String)
+
+data class Bookmark(val truckName: String,
+                    val location: String,
+                    val isBookmarked: Boolean)

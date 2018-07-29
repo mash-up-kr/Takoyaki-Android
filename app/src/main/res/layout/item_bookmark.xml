@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/ivTruck"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/zhihu_primary" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7" />
+
+    <ImageButton
+        android:id="@+id/ibStar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_star_border_black_24dp"
+        app:layout_constraintLeft_toRightOf="@+id/guideline"
+        app:layout_constraintRight_toRightOf="@id/ivTruck"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTruckNameGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="상호명 : "
+        app:layout_constraintTop_toBottomOf="@id/ivTruck" />
+
+    <TextView
+        android:id="@+id/tvTruckName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:text="미미타코야끼fgdfgfdgdfgdfg"
+        app:layout_constraintLeft_toRightOf="@id/tvTruckNameGuide"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivTruck" />
+
+    <TextView
+        android:id="@+id/tvTruckLocationGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="지역 : "
+        app:layout_constraintTop_toBottomOf="@id/tvTruckNameGuide" />
+
+    <TextView
+        android:id="@+id/tvTruckLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="대학로"
+        app:layout_constraintLeft_toRightOf="@id/tvTruckLocationGuide"
+        app:layout_constraintTop_toBottomOf="@id/tvTruckNameGuide" />
+
+</android.support.constraint.ConstraintLayout>
