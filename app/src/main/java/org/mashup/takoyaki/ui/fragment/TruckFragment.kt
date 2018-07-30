@@ -11,10 +11,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.google.android.gms.location.*
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import org.mashup.takoyaki.R
@@ -29,10 +25,11 @@ import org.mashup.takoyaki.presenter.turck.TruckView
 import org.mashup.takoyaki.ui.adapter.TruckPagerAdapter
 import org.mashup.takoyaki.util.SharedPreferencesUtil
 import android.content.IntentSender
+import android.support.v4.view.ViewPager
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.location.LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
+import com.google.android.gms.maps.*
 
 
 /**
@@ -61,7 +58,10 @@ class TruckFragment @Inject constructor() : BaseFragment(), OnMapReadyCallback, 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
 
+    private lateinit var truckPagerAdapter: TruckPagerAdapter
+
     private val foodTrucks = mutableListOf<FoodTruck>()
+    private val markers = mutableListOf<Marker>()
 
     private var isMyPosition = true
 
@@ -79,13 +79,28 @@ class TruckFragment @Inject constructor() : BaseFragment(), OnMapReadyCallback, 
 
         mapLayout.visibility = View.INVISIBLE
 
-        mapFragment.getMapAsync(this)
-
-        presenter.attachView(this)
-
         vpTrucks.clipToPadding = false
         vpTrucks.setPadding(64, 0, 64, 0)
         vpTrucks.pageMargin = 64
+        vpTrucks.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                Log.d(TAG, "onPageScrolled#position : $position")
+                val truck = truckPagerAdapter.getItem(position)
+                googleMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(truck.latitude,
+                                                                          truck.longitude)))
+            }
+
+            override fun onPageSelected(position: Int) {
+
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+
+            }
+        })
+
+        truckPagerAdapter = TruckPagerAdapter()
+        vpTrucks.adapter = truckPagerAdapter
 
         rgDistanceFilter.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
@@ -112,6 +127,9 @@ class TruckFragment @Inject constructor() : BaseFragment(), OnMapReadyCallback, 
             Log.d(TAG, "Camera position latitude : ${centerPosition.target.latitude}, " +
                     "longitude : ${centerPosition.target.longitude}")
         }
+
+        presenter.attachView(this)
+        mapFragment.getMapAsync(this)
     }
 
     private fun setHighAccuracyLocationRequest() {
@@ -142,7 +160,8 @@ class TruckFragment @Inject constructor() : BaseFragment(), OnMapReadyCallback, 
                          Manifest.permission.ACCESS_COARSE_LOCATION)
                 .subscribe({
                                if (it) {
-                                   getLastLocation()
+                                   // getLastLocation()
+                                   getCurrentLocation()
                                } else {
                                    Toast.makeText(activity,
                                                   R.string.permission_location_request_denied,
@@ -159,7 +178,6 @@ class TruckFragment @Inject constructor() : BaseFragment(), OnMapReadyCallback, 
         fusedLocationClient.lastLocation?.addOnSuccessListener {
             if (it != null) {
                 showCurrentLocation(it)
-                getCurrentLocation()
             }
         }
     }
@@ -190,6 +208,8 @@ class TruckFragment @Inject constructor() : BaseFragment(), OnMapReadyCallback, 
                                                                   location.longitude)))
         mapLayout.visibility = View.VISIBLE
         fusedLocationClient.removeLocationUpdates(locationCallback)
+
+        presenter.getFoodTrucks()
     }
 
     private val locationCallback = object : LocationCallback() {
@@ -235,17 +255,18 @@ class TruckFragment @Inject constructor() : BaseFragment(), OnMapReadyCallback, 
         this.foodTrucks.clear()
         this.foodTrucks.addAll(foodTrucks.data)
 
+        truckPagerAdapter.add(foodTrucks.data)
+        vpTrucks.currentItem = 0
 
-
-        val adapter = TruckPagerAdapter()
-
-        vpTrucks.adapter = adapter
-        adapter.add(foodTrucks.data)
+        markers.forEach { it.remove() }
+        markers.clear()
 
         foodTrucks.data.forEach {
             val marker = googleMap.addMarker(MarkerOptions()
                                                      .position(LatLng(it.latitude, it.longitude)))
             marker.tag = it.truckName
+
+            markers.add(marker)
         }
     }
 
