@@ -35,7 +35,11 @@ class TruckPagerAdapter : RecycledPagerAdapter<TruckPagerAdapter.TruckViewHolder
 
         notifyDataSetChanged()
     }
-    
+
+    fun getItem(position: Int): FoodTruck {
+        return foodTrucks[position]
+    }
+
     inner class TruckViewHolder(itemView: View) : ViewHolder(itemView) {
 
         private val textTruckName: TextView = itemView.findViewById(R.id.tvTruckName)

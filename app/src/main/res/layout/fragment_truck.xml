@@ -12,13 +12,67 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    
+
+    <RadioGroup
+        android:id="@+id/rgDistanceFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checkedButton="@+id/rbOneKm"
+        android:orientation="horizontal"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/rbOneHandM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100m" />
+
+        <RadioButton
+            android:id="@+id/rbThreeHandM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="300m" />
+
+        <RadioButton
+            android:id="@+id/rbFiveHandM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="500m" />
+
+        <RadioButton
+            android:id="@+id/rbOneKm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1km" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btMyPosition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="내 위치"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rgDistanceFilter" />
+
     <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
+        android:id="@+id/vpTrucks"
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/btSearchThisPosition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="이 지역 검색하기"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/vpTrucks"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 

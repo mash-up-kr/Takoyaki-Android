@@ -60,7 +60,7 @@ class ReportActivity : DaggerAppCompatActivity() {
                                    REQUEST_LOCATION_SELECT)
         }
 
-       spinnerExpireTime.adapter = ArrayAdapter<String>(this,
+        spinnerExpireTime.adapter = ArrayAdapter<String>(this,
                                                          android.R.layout.simple_spinner_dropdown_item,
                                                          resources.getStringArray(R.array.report_expire_times))
 
@@ -92,7 +92,7 @@ class ReportActivity : DaggerAppCompatActivity() {
                                            .forResult(REQUEST_IMAGE_SELECT)
                                } else {
                                    Toast.makeText(this,
-                                                  getString(R.string.permission_request_denied),
+                                                  getString(R.string.permission_storage_request_denied),
                                                   Toast.LENGTH_SHORT).show()
                                }
                            }, {
