@@ -43,6 +43,9 @@ class TruckFragment @Inject constructor() : BaseFragment(), OnMapReadyCallback, 
         private const val REQUEST_CHECK_LOCATION_SETTING = 2001
 
         private const val MIN_MAP_ZOOM_LEVEL = 15f
+
+        private const val VIEW_PAGER_ZERO_POSITION = 0
+
         private const val DEFAULT_LATITUDE = 37.566692
         private const val DEFAULT_LONGITUDE = 126.978416
     }
@@ -82,25 +85,23 @@ class TruckFragment @Inject constructor() : BaseFragment(), OnMapReadyCallback, 
         vpTrucks.clipToPadding = false
         vpTrucks.setPadding(64, 0, 64, 0)
         vpTrucks.pageMargin = 64
+
+        truckPagerAdapter = TruckPagerAdapter()
+        vpTrucks.adapter = truckPagerAdapter
+
         vpTrucks.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-                Log.d(TAG, "onPageScrolled#position : $position")
-                val truck = truckPagerAdapter.getItem(position)
-                googleMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(truck.latitude,
-                                                                          truck.longitude)))
+
             }
 
             override fun onPageSelected(position: Int) {
-
+                movePagerPositionTruck(position)
             }
 
             override fun onPageScrollStateChanged(state: Int) {
 
             }
         })
-
-        truckPagerAdapter = TruckPagerAdapter()
-        vpTrucks.adapter = truckPagerAdapter
 
         rgDistanceFilter.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
@@ -130,6 +131,14 @@ class TruckFragment @Inject constructor() : BaseFragment(), OnMapReadyCallback, 
 
         presenter.attachView(this)
         mapFragment.getMapAsync(this)
+    }
+
+    private fun movePagerPositionTruck(position: Int) {
+        isMyPosition = true
+        Log.d(TAG, "onPageSelected#position : $position")
+        val truck = truckPagerAdapter.getItem(position)
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(truck.latitude,
+                                                                  truck.longitude)))
     }
 
     private fun setHighAccuracyLocationRequest() {
@@ -256,7 +265,6 @@ class TruckFragment @Inject constructor() : BaseFragment(), OnMapReadyCallback, 
         this.foodTrucks.addAll(foodTrucks.data)
 
         truckPagerAdapter.add(foodTrucks.data)
-        vpTrucks.currentItem = 0
 
         markers.forEach { it.remove() }
         markers.clear()
@@ -267,6 +275,12 @@ class TruckFragment @Inject constructor() : BaseFragment(), OnMapReadyCallback, 
             marker.tag = it.truckName
 
             markers.add(marker)
+        }
+
+        if (vpTrucks.currentItem == VIEW_PAGER_ZERO_POSITION) {
+            movePagerPositionTruck(VIEW_PAGER_ZERO_POSITION)
+        } else {
+            vpTrucks.setCurrentItem(VIEW_PAGER_ZERO_POSITION, true)
         }
     }
 
