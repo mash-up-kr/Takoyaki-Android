@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
@@ -18,6 +19,7 @@ import com.zhihu.matisse.internal.entity.CaptureStrategy
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_report.*
 import org.mashup.takoyaki.R
+import org.mashup.takoyaki.R.id.*
 import org.mashup.takoyaki.ui.adapter.TruckImagePagerAdapter
 import org.mashup.takoyaki.util.image.Glide4Engine
 
@@ -44,8 +46,7 @@ class ReportActivity : DaggerAppCompatActivity() {
         setContentView(R.layout.activity_report)
 
         setSupportActionBar(toolbar)
-
-        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.title = getString(R.string.activity_report)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
@@ -108,8 +109,13 @@ class ReportActivity : DaggerAppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode != Activity.RESULT_OK) {
+            Log.e(TAG, "Activity result is not ok")
+            return
+        }
+
+        if (data == null) {
             return
         }
 
