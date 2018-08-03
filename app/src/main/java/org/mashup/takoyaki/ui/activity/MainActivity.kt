@@ -30,6 +30,7 @@ class MainActivity : DaggerAppCompatActivity() {
                 .replace(R.id.mainContent, fragmentHolder.getFragment(FragmentType.MAIN))
                 .commit()
 
+        btWriteReview.setOnClickListener { WriteReviewActivity.start(this) }
         btReport.setOnClickListener { ReportActivity.start(this) }
         btSearch.setOnClickListener { SearchActivity.start(this) }
     }

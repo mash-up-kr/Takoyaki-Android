@@ -25,12 +25,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.activity.ReportActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.activity.SelectPositionActivity" />
-
         <activity android:name=".ui.activity.SearchActivity" />
 
         <provider
@@ -47,6 +45,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity android:name=".ui.activity.WriteReviewActivity"></activity>
     </application>
 
 </manifest>
