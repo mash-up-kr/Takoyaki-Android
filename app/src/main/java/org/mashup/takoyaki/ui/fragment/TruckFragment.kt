@@ -30,9 +30,11 @@ import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.maps.*
+import io.reactivex.Observable
 import org.mashup.takoyaki.ui.activity.SelectPositionActivity
 import org.mashup.takoyaki.util.LocationUtil
 import org.mashup.takoyaki.util.exception.PermissionDeniedException
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -159,6 +161,11 @@ class TruckFragment @Inject constructor() : BaseFragment(), OnMapReadyCallback, 
         googleMap.setOnMarkerClickListener(this)
 
         getCurrentLocation()
+        LocationUtil.getLastLocation(activity!!).delay(500, TimeUnit.MILLISECONDS).subscribe {
+            if (mapLayout.visibility == View.GONE) {
+                showCurrentLocation(it)
+            }
+        }
     }
 
     private fun getCurrentLocation() {
@@ -191,7 +198,7 @@ class TruckFragment @Inject constructor() : BaseFragment(), OnMapReadyCallback, 
                                                                   location.longitude)))
         mapLayout.visibility = View.VISIBLE
 
-        presenter.getFoodTrucks()
+//        presenter.getFoodTrucks()
     }
 
     private fun failLocationSetting(e: Exception) {

@@ -31,6 +31,8 @@
     <string name="need_input_menu_and_price">메뉴와 가격을 입력해주세요</string>
     <string name="need_input_truck_name">상호명을 입력해주세요</string>
     <string name="need_input_select_truck_position">트럭 위치를 입력해주세요</string>
+    <string name="activity_search">검색하기</string>
+    <string name="search_truck_name">타코야키가게\n찾아보자</string>
 
     <!--spinnerExpireTime-->
     <string-array name="report_expire_times">
