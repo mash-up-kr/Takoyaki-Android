@@ -30,6 +30,9 @@ import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.maps.*
+import org.mashup.takoyaki.ui.activity.SelectPositionActivity
+import org.mashup.takoyaki.util.LocationUtil
+import org.mashup.takoyaki.util.exception.PermissionDeniedException
 
 
 /**
@@ -45,9 +48,6 @@ class TruckFragment @Inject constructor() : BaseFragment(), OnMapReadyCallback, 
         private const val MIN_MAP_ZOOM_LEVEL = 15f
 
         private const val VIEW_PAGER_ZERO_POSITION = 0
-
-        private const val DEFAULT_LATITUDE = 37.566692
-        private const val DEFAULT_LONGITUDE = 126.978416
     }
 
     @Inject
@@ -58,7 +58,6 @@ class TruckFragment @Inject constructor() : BaseFragment(), OnMapReadyCallback, 
 
     private lateinit var googleMap: GoogleMap
 
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
 
     private lateinit var truckPagerAdapter: TruckPagerAdapter
@@ -73,7 +72,6 @@ class TruckFragment @Inject constructor() : BaseFragment(), OnMapReadyCallback, 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity!!)
         locationRequest = LocationRequest()
         setHighAccuracyLocationRequest()
 
@@ -160,53 +158,29 @@ class TruckFragment @Inject constructor() : BaseFragment(), OnMapReadyCallback, 
         googleMap.setOnCameraIdleListener(this)
         googleMap.setOnMarkerClickListener(this)
 
-        checkLocationPermission()
+        getCurrentLocation()
     }
 
-    private fun checkLocationPermission() {
-        RxPermissions(this)
-                .request(Manifest.permission.ACCESS_FINE_LOCATION,
-                         Manifest.permission.ACCESS_COARSE_LOCATION)
-                .subscribe({
-                               if (it) {
-                                   // getLastLocation()
-                                   getCurrentLocation()
-                               } else {
-                                   Toast.makeText(activity,
-                                                  R.string.permission_location_request_denied,
-                                                  Toast.LENGTH_SHORT).show()
-                                   activity?.finish()
-                               }
-                           }, {
-
-                           })
-    }
-
-    @SuppressLint("MissingPermission")
-    private fun getLastLocation() {
-        fusedLocationClient.lastLocation?.addOnSuccessListener {
-            if (it != null) {
-                showCurrentLocation(it)
-            }
-        }
-    }
-
-    @SuppressLint("MissingPermission")
     private fun getCurrentLocation() {
-        val settingClient = LocationServices.getSettingsClient(activity!!)
-        settingClient.checkLocationSettings(LocationSettingsRequest
-                                                    .Builder()
-                                                    .addLocationRequest(locationRequest!!)
-                                                    .setAlwaysShow(true)
-                                                    .build())
-                .addOnSuccessListener(activity!!) {
-                    fusedLocationClient.requestLocationUpdates(locationRequest,
-                                                               locationCallback,
-                                                               Looper.getMainLooper())
-                }
-                .addOnFailureListener {
-                    failLocationSetting(it)
-                }
+        LocationUtil.getUpdateLocation(activity!!, locationRequest).subscribe(
+                {
+                    showCurrentLocation(it)
+                }, {
+                    when (it) {
+                        is PermissionDeniedException -> {
+                            Toast.makeText(activity!!,
+                                           R.string.permission_location_request_denied,
+                                           Toast.LENGTH_SHORT).show()
+                            activity!!.finish()
+                        }
+                        is ApiException -> {
+                            failLocationSetting(it)
+                        }
+                        else -> {
+                            Log.e(TAG, "get Location error", it)
+                        }
+                    }
+                })
     }
 
     private fun showCurrentLocation(location: Location) {
@@ -216,15 +190,8 @@ class TruckFragment @Inject constructor() : BaseFragment(), OnMapReadyCallback, 
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(location.latitude,
                                                                   location.longitude)))
         mapLayout.visibility = View.VISIBLE
-        fusedLocationClient.removeLocationUpdates(locationCallback)
 
         presenter.getFoodTrucks()
-    }
-
-    private val locationCallback = object : LocationCallback() {
-        override fun onLocationResult(locationResult: LocationResult) {
-            showCurrentLocation(locationResult.lastLocation)
-        }
     }
 
     private fun failLocationSetting(e: Exception) {

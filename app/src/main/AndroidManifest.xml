@@ -31,7 +31,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".ui.activity.ReportActivity" />
+        <activity
+            android:name=".ui.activity.ReportActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.activity.SelectPositionActivity" />
 
         <provider
