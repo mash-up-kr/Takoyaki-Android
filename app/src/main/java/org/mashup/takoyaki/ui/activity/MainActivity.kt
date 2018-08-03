@@ -31,6 +31,7 @@ class MainActivity : DaggerAppCompatActivity() {
                 .commit()
 
         btReport.setOnClickListener { ReportActivity.start(this) }
+        btSearch.setOnClickListener { SearchActivity.start(this) }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
