@@ -19,9 +19,9 @@ import com.zhihu.matisse.internal.entity.CaptureStrategy
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_report.*
 import org.mashup.takoyaki.R
-import org.mashup.takoyaki.R.id.*
 import org.mashup.takoyaki.ui.adapter.TruckImagePagerAdapter
 import org.mashup.takoyaki.util.image.Glide4Engine
+import org.mashup.takoyaki.util.toast
 
 class ReportActivity : DaggerAppCompatActivity() {
 
@@ -73,6 +73,16 @@ class ReportActivity : DaggerAppCompatActivity() {
     }
 
     private fun checkInputTruckReport(): Boolean {
+        if (etTruckName.text.toString().isEmpty()) {
+            toast(R.string.need_input_truck_name)
+            return false
+        }
+
+        if (btSelectPosition.text.toString() == "위치 선택") {
+            toast(R.string.need_input_select_truck_position)
+            return false
+        }
+
         return true
     }
 
