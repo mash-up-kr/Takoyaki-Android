@@ -198,7 +198,7 @@ class TruckFragment @Inject constructor() : BaseFragment(), OnMapReadyCallback, 
                                                                   location.longitude)))
         mapLayout.visibility = View.VISIBLE
 
-//        presenter.getFoodTrucks()
+        presenter.getFoodTrucks()
     }
 
     private fun failLocationSetting(e: Exception) {
