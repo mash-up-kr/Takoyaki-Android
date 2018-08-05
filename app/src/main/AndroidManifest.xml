@@ -44,7 +44,8 @@
         </provider>
 
         <activity android:name=".ui.activity.MyPageActivity" />
-        <activity android:name=".ui.activity.BookmarkActivity"></activity>
+        <activity android:name=".ui.activity.BookmarkActivity" />
+        <activity android:name=".ui.activity.ReportHistoryActivity"></activity>
     </application>
 
 </manifest>

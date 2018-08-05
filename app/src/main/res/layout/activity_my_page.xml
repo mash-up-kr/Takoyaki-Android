@@ -56,7 +56,7 @@
         />
 
     <TextView
-        android:id="@+id/tvInformHistory"
+        android:id="@+id/tvReportHistory"
         android:text="제보내역"
         android:textSize="15sp"
         android:layout_width="wrap_content"
@@ -74,7 +74,7 @@
         android:textSize="15sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvInformHistory"
+        app:layout_constraintTop_toBottomOf="@id/tvReportHistory"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="30dp"
