@@ -44,6 +44,7 @@ ext {
     daggerVersion = "2.16"
     roomVersion = "1.1.0"
     glideVersion = "4.7.1"
+    headerDecorVersion = "0.2.8"
 }
 
 dependencies {
@@ -80,6 +81,8 @@ dependencies {
     implementation('com.github.tbruyelle:rxpermissions:0.10.2') {
         exclude group: 'io.reactivex.rxjava2'
     }
+
+    implementation "ca.barrenechea.header-decor:header-decor:$headerDecorVersion"
 
     testImplementation 'junit:junit:4.12'
 
