@@ -1,5 +1,7 @@
 package org.mashup.takoyaki.presenter.mypage.reporthistory
 
+import android.util.Log
+import android.widget.Toast
 import org.mashup.takoyaki.data.remote.model.ReportHistory
 
 class ReportHistoryPresenter(val view: ReportHistoryView) {
@@ -11,7 +13,7 @@ class ReportHistoryPresenter(val view: ReportHistoryView) {
     }
 
     fun onContentClicked(reportHistory: ReportHistory) {
-
+        Log.e("#", "onContentClicked")
     }
 
 }

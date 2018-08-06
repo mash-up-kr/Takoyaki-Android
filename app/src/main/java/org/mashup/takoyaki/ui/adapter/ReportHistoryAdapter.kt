@@ -23,16 +23,12 @@ class ReportHistoryAdapter(
         ReportHistoryContentViewHolder(
                 LayoutInflater.from(parent.context)
                         .inflate(R.layout.item_report_history_content, parent, false)
-        ).apply {
-            itemView.setOnClickListener {
-                onClickContent(data[adapterPosition])
-            }
-        }
+        )
 
     override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: ReportHistoryContentViewHolder, position: Int) {
-        holder.bind(data[position])
+        holder.bind(data[position], onClickContent)
     }
 
     override fun getHeaderId(position: Int): Long =
@@ -85,13 +81,15 @@ class ReportHistoryContentViewHolder(view: View) : RecyclerView.ViewHolder(view)
     private val price: TextView = view.findViewById(R.id.tvPrice)
     private val finishDate: TextView = view.findViewById(R.id.tvFinishDate)
 
-    fun bind(reportHistory: ReportHistory) {
+    fun bind(reportHistory: ReportHistory, onClickContent: (ReportHistory) -> Unit) {
         with(itemView) {
             truckName.text = reportHistory.truckName
             location.text = reportHistory.location
             menuName.text = reportHistory.menuName
             price.text = reportHistory.price.toString()
             finishDate.text = reportHistory.finishDate.toFormattedString("yyy.MM.dd EEE")
+
+            setOnClickListener { onClickContent(reportHistory) }
         }
     }
 }
