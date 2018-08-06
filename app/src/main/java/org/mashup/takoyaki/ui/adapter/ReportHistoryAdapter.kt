@@ -14,7 +14,6 @@ import org.mashup.takoyaki.util.toFormattedString
 import java.util.*
 
 class ReportHistoryAdapter(
-        private val items: List<ReportHistory>,
         private val onClickContent: (ReportHistory) -> Unit)
     : RecyclerView.Adapter<ReportHistoryContentViewHolder>(), StickyHeaderAdapter<ReportHistoryHeaderViewHolder> {
 
