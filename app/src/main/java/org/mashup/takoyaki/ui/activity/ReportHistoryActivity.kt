@@ -4,13 +4,16 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import ca.barrenechea.widget.recyclerview.decoration.StickyHeaderAdapter
 import ca.barrenechea.widget.recyclerview.decoration.StickyHeaderDecoration
 import kotlinx.android.synthetic.main.activity_report_history.*
 import org.mashup.takoyaki.R
+import org.mashup.takoyaki.data.remote.model.ReportHistory
 import org.mashup.takoyaki.presenter.mypage.reporthistory.ReportHistoryPresenter
 import org.mashup.takoyaki.presenter.mypage.reporthistory.ReportHistoryView
 import org.mashup.takoyaki.ui.adapter.ReportHistoryAdapter
+import org.mashup.takoyaki.util.LinearDividerDecoration
 
 class ReportHistoryActivity : AppCompatActivity(), ReportHistoryView {
     val presenter: ReportHistoryPresenter = ReportHistoryPresenter(this)
@@ -31,16 +34,20 @@ class ReportHistoryActivity : AppCompatActivity(), ReportHistoryView {
 
     override fun setAdapter() {
         with(recyclerview) {
-            stickyHeaderDecoration?.run {
-                removeItemDecoration(this)
+            layoutManager = android.support.v7.widget.LinearLayoutManager(context)
+            ReportHistoryAdapter(presenter::onContentClicked).let {
+                adapter = it
+                addItemDecoration(LinearDividerDecoration(context, showAtLastItem = false))
+                addItemDecoration(ca.barrenechea.widget.recyclerview.decoration.StickyHeaderDecoration(it))
             }
-            adapter = ReportHistoryAdapter(presenter::onContentClicked)
-
-            stickyHeaderDecoration = ca.barrenechea.widget.recyclerview.decoration.StickyHeaderDecoration(
-                    adapter as StickyHeaderAdapter<*>
-            )
-            addItemDecoration(stickyHeaderDecoration)
         }
+    }
+
+    override fun setDataToAdapter(reportHistories: List<ReportHistory>) {
+        (recyclerview.adapter as? ReportHistoryAdapter)?.run {
+            setData(reportHistories)
+        }
+        recyclerview.visibility = View.VISIBLE
     }
 
     override fun showErrorMessage(throwable: Throwable) {

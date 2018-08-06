@@ -29,4 +29,4 @@ data class ReportHistory(val uploadDate: Date,
                          val location: String,
                          val menuName: String,
                          val price: Long,
-                         val finishDate: String)
+                         val finishDate: Date)

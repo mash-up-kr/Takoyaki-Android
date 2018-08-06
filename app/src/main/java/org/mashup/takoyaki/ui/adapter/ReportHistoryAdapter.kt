@@ -53,6 +53,20 @@ class ReportHistoryAdapter(
             viewholder.bind(data[position].uploadDate)
     }
 
+    fun setData(reportHistories: List<ReportHistory>) {
+        val testList: List<ReportHistory> = listOf(
+                ReportHistory(Date(), "미미타코야끼", "서울시 강서구",
+                        "매운맛", 3000, Date()),
+                ReportHistory(Date(), "미미타코야끼", "서울시 강서구",
+                        "매운맛", 3000, Date()),
+                ReportHistory(Date(), "미미타코야끼", "서울시 강서구",
+                        "매운맛", 3000, Date())
+        )
+        data.clear()
+        data.addAll(testList)
+        notifyDataSetChanged()
+    }
+
 }
 
 class ReportHistoryHeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -77,7 +91,7 @@ class ReportHistoryContentViewHolder(view: View) : RecyclerView.ViewHolder(view)
             location.text = reportHistory.location
             menuName.text = reportHistory.menuName
             price.text = reportHistory.price.toString()
-            finishDate.text = reportHistory.finishDate
+            finishDate.text = reportHistory.finishDate.toFormattedString("yyy.MM.dd EEE")
         }
     }
 }
