@@ -14,15 +14,15 @@ import org.mashup.takoyaki.util.toFormattedString
 import java.util.*
 
 class ReportHistoryAdapter(
-        private val onClickContent: (ReportHistory) -> Unit)
+    private val onClickContent: (ReportHistory) -> Unit)
     : RecyclerView.Adapter<ReportHistoryContentViewHolder>(), StickyHeaderAdapter<ReportHistoryHeaderViewHolder> {
 
     private val data = mutableListOf<ReportHistory>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReportHistoryContentViewHolder =
         ReportHistoryContentViewHolder(
-                LayoutInflater.from(parent.context)
-                        .inflate(R.layout.item_report_history_content, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_report_history_content, parent, false)
         )
 
     override fun getItemCount(): Int = data.size
@@ -40,8 +40,8 @@ class ReportHistoryAdapter(
 
     override fun onCreateHeaderViewHolder(parent: ViewGroup): ReportHistoryHeaderViewHolder =
         ReportHistoryHeaderViewHolder(
-                LayoutInflater.from(parent.context)
-                        .inflate(R.layout.item_report_history_header, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_report_history_header, parent, false)
         )
 
     override fun onBindHeaderViewHolder(viewholder: ReportHistoryHeaderViewHolder, position: Int) {
@@ -51,12 +51,12 @@ class ReportHistoryAdapter(
 
     fun setData(reportHistories: List<ReportHistory>) {
         val testList: List<ReportHistory> = listOf(
-                ReportHistory(Date(), "미미타코야끼", "서울시 강서구",
-                        "매운맛", 3000, Date()),
-                ReportHistory(Date(), "미미타코야끼", "서울시 강서구",
-                        "매운맛", 3000, Date()),
-                ReportHistory(Date(), "미미타코야끼", "서울시 강서구",
-                        "매운맛", 3000, Date())
+            ReportHistory(Date(), "미미타코야끼", "서울시 강서구",
+                "매운맛", 3000, Date()),
+            ReportHistory(Date(), "미미타코야끼", "서울시 강서구",
+                "매운맛", 3000, Date()),
+            ReportHistory(Date(), "미미타코야끼", "서울시 강서구",
+                "매운맛", 3000, Date())
         )
         data.clear()
         data.addAll(testList)
@@ -70,7 +70,7 @@ class ReportHistoryHeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) 
 
     fun bind(date: Date) {
         dateTextView.text =
-                date.toFormattedString("yyy.MM.dd EEE")
+            date.toFormattedString("yyy.MM.dd EEE")
     }
 }
 
