@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_write_review.*
 import org.mashup.takoyaki.R
+import org.mashup.takoyaki.ui.fragment.TruckListFragment
 
 class WriteReviewActivity : AppCompatActivity() {
 
@@ -25,5 +26,10 @@ class WriteReviewActivity : AppCompatActivity() {
         supportActionBar?.title = getString(R.string.activity_write_review)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.flContent,
+                         TruckListFragment.newInstance(),
+                         TruckListFragment.TAG).commit()
     }
 }
