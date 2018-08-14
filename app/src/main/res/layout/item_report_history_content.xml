@@ -20,7 +20,6 @@
         android:gravity="bottom"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="분석아아아아아아아"
         />
 
     <TextView

@@ -45,12 +45,14 @@ ext {
     roomVersion = "1.1.0"
     glideVersion = "4.7.1"
     headerDecorVersion = "0.2.8"
+    ankoVersion = "0.9"
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.anko:anko-support-v4:$ankoVersion"
 
     implementation "com.android.support:appcompat-v7:$supportLibVersion"
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'

@@ -46,7 +46,7 @@
         <activity android:name=".ui.activity.MyPageActivity" />
         <activity android:name=".ui.activity.BookmarkActivity" />
         <activity android:name=".ui.activity.ReportHistoryActivity" />
-        <activity android:name=".ui.activity.ReportHistoryDetailActivity"></activity>
+        <activity android:name=".ui.activity.ReportHistoryDetailActivity"/>
     </application>
 
 </manifest>

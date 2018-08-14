@@ -6,4 +6,5 @@ import org.mashup.takoyaki.presenter.View
 interface ReportHistoryView : View {
     fun setAdapter()
     fun setDataToAdapter(reportHistories: List<ReportHistory>)
+    fun moveToHistoryDetailActivity(id: String)
 }

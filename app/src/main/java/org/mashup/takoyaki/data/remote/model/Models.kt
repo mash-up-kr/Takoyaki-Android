@@ -24,7 +24,8 @@ data class Bookmark(val truckName: String,
                     val location: String,
                     val isBookmarked: Boolean)
 
-data class ReportHistory(val uploadDate: Date,
+data class ReportHistory(val id: String,
+                         val uploadDate: Date,
                          val truckName: String,
                          val location: String,
                          val menuName: String,

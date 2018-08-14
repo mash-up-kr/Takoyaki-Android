@@ -50,16 +50,8 @@ class ReportHistoryAdapter(
     }
 
     fun setData(reportHistories: List<ReportHistory>) {
-        val testList: List<ReportHistory> = listOf(
-            ReportHistory(Date(), "미미타코야끼", "서울시 강서구",
-                "매운맛", 3000, Date()),
-            ReportHistory(Date(), "미미타코야끼", "서울시 강서구",
-                "매운맛", 3000, Date()),
-            ReportHistory(Date(), "미미타코야끼", "서울시 강서구",
-                "매운맛", 3000, Date())
-        )
         data.clear()
-        data.addAll(testList)
+        data.addAll(reportHistories)
         notifyDataSetChanged()
     }
 
