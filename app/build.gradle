@@ -46,6 +46,7 @@ ext {
     glideVersion = "4.7.1"
     headerDecorVersion = "0.2.8"
     ankoVersion = "0.9"
+    playServiceVersion = "15.0.1"
 }
 
 dependencies {
@@ -77,7 +78,8 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
 
-    implementation 'com.google.android.gms:play-services-maps:15.0.1'
+    implementation "com.google.android.gms:play-services-maps:$playServiceVersion"
+    implementation "com.google.android.gms:play-services-location:$playServiceVersion"
 
     implementation 'com.zhihu.android:matisse:0.5.1-beta1'
     implementation('com.github.tbruyelle:rxpermissions:0.10.2') {

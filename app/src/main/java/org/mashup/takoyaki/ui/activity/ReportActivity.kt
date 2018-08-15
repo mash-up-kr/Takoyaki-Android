@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
@@ -20,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_report.*
 import org.mashup.takoyaki.R
 import org.mashup.takoyaki.ui.adapter.TruckImagePagerAdapter
 import org.mashup.takoyaki.util.image.Glide4Engine
+import org.mashup.takoyaki.util.toast
 
 class ReportActivity : DaggerAppCompatActivity() {
 
@@ -44,8 +46,7 @@ class ReportActivity : DaggerAppCompatActivity() {
         setContentView(R.layout.activity_report)
 
         setSupportActionBar(toolbar)
-
-        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.title = getString(R.string.activity_report)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
@@ -60,7 +61,7 @@ class ReportActivity : DaggerAppCompatActivity() {
                                    REQUEST_LOCATION_SELECT)
         }
 
-       spinnerExpireTime.adapter = ArrayAdapter<String>(this,
+        spinnerExpireTime.adapter = ArrayAdapter<String>(this,
                                                          android.R.layout.simple_spinner_dropdown_item,
                                                          resources.getStringArray(R.array.report_expire_times))
 
@@ -72,6 +73,16 @@ class ReportActivity : DaggerAppCompatActivity() {
     }
 
     private fun checkInputTruckReport(): Boolean {
+        if (etTruckName.text.toString().isEmpty()) {
+            toast(R.string.need_input_truck_name)
+            return false
+        }
+
+        if (btSelectPosition.text.toString() == "위치 선택") {
+            toast(R.string.need_input_select_truck_position)
+            return false
+        }
+
         return true
     }
 
@@ -92,7 +103,7 @@ class ReportActivity : DaggerAppCompatActivity() {
                                            .forResult(REQUEST_IMAGE_SELECT)
                                } else {
                                    Toast.makeText(this,
-                                                  getString(R.string.permission_request_denied),
+                                                  getString(R.string.permission_storage_request_denied),
                                                   Toast.LENGTH_SHORT).show()
                                }
                            }, {
@@ -108,8 +119,13 @@ class ReportActivity : DaggerAppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode != Activity.RESULT_OK) {
+            Log.e(TAG, "Activity result is not ok")
+            return
+        }
+
+        if (data == null) {
             return
         }
 
