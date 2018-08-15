@@ -41,6 +41,11 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <activity android:name=".ui.activity.MyPageActivity" />
+        <activity android:name=".ui.activity.BookmarkActivity" />
+        <activity android:name=".ui.activity.ReportHistoryActivity" />
+        <activity android:name=".ui.activity.ReportHistoryDetailActivity" />
+        <activity android:name=".ui.activity.SettingActivity"></activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />

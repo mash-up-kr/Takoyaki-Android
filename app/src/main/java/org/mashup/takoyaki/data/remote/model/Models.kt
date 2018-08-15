@@ -1,5 +1,7 @@
 package org.mashup.takoyaki.data.remote.model
 
+import java.util.*
+
 
 /**
  * Created by jonghunlee on 2018-07-01.
@@ -17,3 +19,15 @@ data class FoodTruck(val id: Int,
 data class FoodTruckDetail(val truckName: String,
                            val description: String,
                            val type: String)
+
+data class Bookmark(val truckName: String,
+                    val location: String,
+                    val isBookmarked: Boolean)
+
+data class ReportHistory(val id: String,
+                         val uploadDate: Date,
+                         val truckName: String,
+                         val location: String,
+                         val menuName: String,
+                         val price: Long,
+                         val finishDate: Date)

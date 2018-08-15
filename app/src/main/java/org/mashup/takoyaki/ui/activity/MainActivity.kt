@@ -48,7 +48,7 @@ class MainActivity : DaggerAppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
         //TODO Show My Page Activity
-            R.id.menu_my_page -> Log.d("test", "test")
+            R.id.menu_my_page -> MyPageActivity.start(this)
         }
 
         return super.onOptionsItemSelected(item)
