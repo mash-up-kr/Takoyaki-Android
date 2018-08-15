@@ -2,6 +2,7 @@ package org.mashup.takoyaki.ui.activity
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Rect
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_bookmark.*
@@ -11,6 +12,15 @@ import org.mashup.takoyaki.ui.adapter.BookmarkAdapter
 import android.view.View
 import org.mashup.takoyaki.presenter.mypage.bookmark.BookmarkPresenter
 import org.mashup.takoyaki.presenter.mypage.bookmark.BookmarkView
+import android.support.v7.widget.RecyclerView
+import android.opengl.ETC1.getWidth
+import android.support.v7.widget.GridLayoutManager
+
+
+
+
+
+
 
 class BookmarkActivity : AppCompatActivity(), BookmarkView {
     val presenter: BookmarkPresenter = BookmarkPresenter(this)
@@ -31,6 +41,8 @@ class BookmarkActivity : AppCompatActivity(), BookmarkView {
     override fun setAdapter() {
         with(recyclerview) {
             layoutManager = android.support.v7.widget.GridLayoutManager(context, 2)
+            setHasFixedSize(true)
+            addItemDecoration(EqualSpacingItemDecoration(16, 2))
             BookmarkAdapter(presenter::onContentClicked).let {
                 adapter = it
             }
@@ -54,5 +66,19 @@ class BookmarkActivity : AppCompatActivity(), BookmarkView {
 
     override fun hideProgress() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}
+
+class EqualSpacingItemDecoration @JvmOverloads constructor(private val spacing: Int, private var displayMode: Int = -1) : RecyclerView.ItemDecoration() {
+
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State?) {
+        outRect.bottom = 40
+        outRect.left = 40
+
+        if (parent.getChildLayoutPosition(view) % 2 == 0) {
+            outRect.right = 20
+        } else {
+            outRect.left = 20
+        }
     }
 }
