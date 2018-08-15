@@ -13,14 +13,6 @@ import android.view.View
 import org.mashup.takoyaki.presenter.mypage.bookmark.BookmarkPresenter
 import org.mashup.takoyaki.presenter.mypage.bookmark.BookmarkView
 import android.support.v7.widget.RecyclerView
-import android.opengl.ETC1.getWidth
-import android.support.v7.widget.GridLayoutManager
-
-
-
-
-
-
 
 class BookmarkActivity : AppCompatActivity(), BookmarkView {
     val presenter: BookmarkPresenter = BookmarkPresenter(this)
