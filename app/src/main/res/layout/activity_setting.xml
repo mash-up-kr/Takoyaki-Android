@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.SettingActivity"
+    android:layout_margin="50dp">
+
+    <TextView
+        android:id="@+id/tvNotifySet"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1. 새 가게 등록 시 알림 설정" />
+
+    <TextView
+        android:id="@+id/tvVersion"
+        app:layout_constraintTop_toBottomOf="@+id/tvNotifySet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2. 버전 정보"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/tvLicense"
+        app:layout_constraintTop_toBottomOf="@+id/tvVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3. 오픈소스 라이센스"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/tvPolicy"
+        app:layout_constraintTop_toBottomOf="@+id/tvLicense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4. 약관 및 정책"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/tvTerms"
+        app:layout_constraintTop_toBottomOf="@+id/tvPolicy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- 이용약관"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/tvNonMemberPolicy"
+        app:layout_constraintTop_toBottomOf="@+id/tvTerms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- 비회원 이용자 정책"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/tvPrivacyPolicy"
+        app:layout_constraintTop_toBottomOf="@+id/tvNonMemberPolicy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- 개인정보 처리방침"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/tvGpsPolicy"
+        app:layout_constraintTop_toBottomOf="@+id/tvPrivacyPolicy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- 위치 기반 서비스 이용약관"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/tvLogout"
+        app:layout_constraintTop_toBottomOf="@+id/tvGpsPolicy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5. 로그아웃"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/tvLeave"
+        app:layout_constraintTop_toBottomOf="@+id/tvLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="6. 회원 탈퇴"
+        android:layout_marginTop="16dp" />
+
+</android.support.constraint.ConstraintLayout>

@@ -21,6 +21,7 @@ class MyPageActivity : AppCompatActivity() {
 
         tvBookmark.setOnClickListener { BookmarkActivity.start(this) }
         tvReportHistory.setOnClickListener { ReportHistoryActivity.start(this) }
+        tvSetting.setOnClickListener { SettingActivity.start(this) }
     }
 }
 
