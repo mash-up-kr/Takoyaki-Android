@@ -18,7 +18,7 @@ class ReportHistoryDetailActivity : AppCompatActivity(), ReportHistoryDetailView
 
     companion object {
         const val REQUEST_REPORT = 0
-        const val KEY_ID = "0"
+        const val KEY_ID = "report_id"
 
         fun start(context: Context) {
             context.startActivity(Intent(context, ReportHistoryDetailActivity::class.java))
@@ -35,7 +35,7 @@ class ReportHistoryDetailActivity : AppCompatActivity(), ReportHistoryDetailView
     override fun setAdapter() {
         with(recyclerview) {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            ReportHistoryDetailAdapter(presenter::onContentClicked).let {
+            ReportHistoryDetailAdapter().let {
                 adapter = it
             }
         }
