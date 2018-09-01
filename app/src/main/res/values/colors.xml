@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="primary">#ed5037</color>
+    <color name="secondary">#0524a3</color>
+    <color name="point">#f7f1e3</color>
     <color name="gray">#e1e1e1</color>
+    <color name="error">#f03e41</color>
+    <color name="success">#57ad68</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#1d1d1b</color>
+    <color name="gray1">#9b9b9b</color>
+    <color name="gray2">#d8d4d3</color>
+    <color name="gray3">#ededed</color>
 </resources>
